@@ -58,26 +58,26 @@ def CreateTrainTransforms(cropSize=[64,64,64], padding=10, num_sample=10):
             image_key="image",
             image_threshold=0,
         ),
-        RandFlipd(
-            keys=["image", "label"],
-            spatial_axis=[0],
-            prob=0.20,
-        ),
-        RandFlipd(
-            keys=["image", "label"],
-            spatial_axis=[1],
-            prob=0.20,
-        ),
-        RandFlipd(
-            keys=["image", "label"],
-            spatial_axis=[2],
-            prob=0.20,
-        ),
-        RandRotate90d(
-            keys=["image", "label"],
-            prob=0.10,
-            max_k=3,
-        ),
+        # RandFlipd(
+        #     keys=["image", "label"],
+        #     spatial_axis=[0],
+        #     prob=0.20,
+        # ),
+        # RandFlipd(
+        #     keys=["image", "label"],
+        #     spatial_axis=[1],
+        #     prob=0.20,
+        # ),
+        # RandFlipd(
+        #     keys=["image", "label"],
+        #     spatial_axis=[2],
+        #     prob=0.20,
+        # ),
+        # RandRotate90d(
+        #     keys=["image", "label"],
+        #     prob=0.10,
+        #     max_k=3,
+        # ),
         RandShiftIntensityd(
             keys=["image"],
             offsets=0.10,
@@ -101,26 +101,26 @@ def CreateValidationTransforms():
                 keys=["image"],minv = 0.0, maxv = 1.0, factor = None
             ),
             # CropForegroundd(keys=["image", "label"], source_key="image"),
-            RandFlipd(
-                keys=["image", "label"],
-                spatial_axis=[0],
-                prob=0.20,
-            ),
-            RandFlipd(
-                keys=["image", "label"],
-                spatial_axis=[1],
-                prob=0.20,
-            ),
-            RandFlipd(
-                keys=["image", "label"],
-                spatial_axis=[2],
-                prob=0.20,
-            ),
-            RandRotate90d(
-                keys=["image", "label"],
-                prob=0.10,
-                max_k=3,
-            ),
+            # RandFlipd(
+            #     keys=["image", "label"],
+            #     spatial_axis=[0],
+            #     prob=0.20,
+            # ),
+            # RandFlipd(
+            #     keys=["image", "label"],
+            #     spatial_axis=[1],
+            #     prob=0.20,
+            # ),
+            # RandFlipd(
+            #     keys=["image", "label"],
+            #     spatial_axis=[2],
+            #     prob=0.20,
+            # ),
+            # RandRotate90d(
+            #     keys=["image", "label"],
+            #     prob=0.10,
+            #     max_k=3,
+            # ),
             RandAdjustContrastd(
                 keys=["image"],
                 prob=0.8,
