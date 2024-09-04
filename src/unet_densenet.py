@@ -6,23 +6,41 @@ from torchvision.models import DenseNet
 
 class _UpsampleBlock(nn.Module):
     def __init__(
-        self, in_channels, out_channels=None, skip_in=0, use_bn=True, parametric=False
+        self, 
+        in_channels, 
+        out_channels=None, 
+        kernel_size=(3,3,3),
+        padding=(0, 0), 
+        size=(2,2)
     ):
         super(_UpsampleBlock, self).__init__()
 
-        out_channels = in_channels / 2 if out_channels is None else out_channels
+        out_channels = in_channels // 2 if out_channels is None else out_channels
 
-        self.up = nn.ConvTranspose2d(
-            in_channels=in_channels,
-            out_channels=out_channels,
-            kernel_size=(4, 4),
-            stride=2,
-            padding=1,
-            output_padding=0,
-            bias=(not use_bn),
+        self.upsample = nn.Upsample(
+            scale_factor=size, mode="trilinear", align_corners=True
         )
-        self.bn1 = nn.BatchNorm2d(out_channels) if use_bn else None
+        self.conv = nn.Sequential(
+            nn.Conv3d(
+                in_channels,
+                out_channels,
+                kernel_size=(kernel_size, 3, 3),
+                padding=padding,
+            ),
+            nn.BatchNorm3d(out_channels),
+            nn.ReLU(),
+        )
 
+    def forward(self, x, projected_residual):
+        """
+        :param x:  image tensor
+        :return:   output of the forward pass
+        """
+        residual = torch.cat(
+            (self.upsample(x), self.upsample(projected_residual)),
+            dim=1,
+        )
+        return self.conv(residual)
 
 class UnetDensenet(nn.Module):
     def __init__(
