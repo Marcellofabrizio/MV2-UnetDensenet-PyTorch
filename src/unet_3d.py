@@ -1,7 +1,7 @@
 import torch
 
 from torch import nn
-from torchvision.models import DenseNet
+from torchvision.models import densenet121
 
 
 class _UpsampleBlock(nn.Module):
@@ -51,3 +51,6 @@ class UnetDensenet(nn.Module):
         num_init_features=64,
     ):
         super(UnetDensenet, self).__init__()
+
+    def get_backbone(self):
+        return densenet121(pretrained=True).features
