@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 train_transforms = CreateTrainTransforms()
 val_transforms = CreateValidationTransforms()
 
-data_dir = "data/"
+data_dir = "data/dataset0/"
 split_json = "dataset_0.json"
 
 datasets = data_dir + split_json
@@ -29,8 +29,9 @@ val_ds = CacheDataset(data=val_files, transform=val_transforms, cache_num=6, cac
 val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
 
 slice_map = {
-    "paciente_4.nii.gz": 198,
+    "coleta_4.nii.gz": 120,
 }
+
 case_num = 0
 img_name = os.path.split(val_ds[case_num]["image"].meta["filename_or_obj"])[1]
 img = val_ds[case_num]["image"]

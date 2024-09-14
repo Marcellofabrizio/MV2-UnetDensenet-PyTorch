@@ -6,13 +6,6 @@ import matplotlib.pyplot as plt
 
 # -------------------- MONAI --------------------
 
-from monai.networks.nets import UNet
-from monai.networks.layers import Norm
-from monai.data import CacheDataset, DataLoader, Dataset
-
-from monai.inferers import sliding_window_inference
-
-from monai.utils import first, set_determinism
 from monai.transforms import(
     AsDiscrete,
     EnsureChannelFirstd,
@@ -30,13 +23,6 @@ from monai.transforms import(
     RandRotate90d,
     ToTensord,
     ScaleIntensityd,
-)
-
-from monai.data import (
-    DataLoader,
-    CacheDataset,
-    load_decathlon_datalist,
-    decollate_batch,
 )
 
 def CreateTrainTransforms(cropSize=[64,64,64], padding=10, num_sample=10):
