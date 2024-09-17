@@ -29,13 +29,14 @@ val_ds = CacheDataset(data=val_files, transform=val_transforms, cache_num=6, cac
 val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
 
 slice_map = {
-    "coleta_4.nii.gz": 120,
+    "coleta_3.nii.gz": 78,
 }
 
 case_num = 0
-img_name = os.path.split(val_ds[case_num]["image"].meta["filename_or_obj"])[1]
-img = val_ds[case_num]["image"]
-label = val_ds[case_num]["label"]
+
+img_name = os.path.split(train_ds[case_num]["image"].meta["filename_or_obj"])[1]
+img = train_ds[case_num]["image"]
+label = train_ds[case_num]["label"]
 img_shape = img.shape
 label_shape = label.shape
 print(f"image shape: {img_shape}, label shape: {label_shape}")
