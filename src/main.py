@@ -13,3 +13,5 @@ unet.eval()
 
 with no_grad():
     output = unet(dummy_input)
+    
+print(output.shape)
