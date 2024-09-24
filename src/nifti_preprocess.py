@@ -25,8 +25,6 @@ train_ds = CacheDataset(
     num_workers=8,
 )
 train_loader = DataLoader(train_ds, batch_size=1, shuffle=True, num_workers=8, pin_memory=True)
-val_ds = CacheDataset(data=val_files, transform=val_transforms, cache_num=6, cache_rate=1.0, num_workers=4)
-val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
 
 slice_map = {
     "coleta_3.nii.gz": 78,
