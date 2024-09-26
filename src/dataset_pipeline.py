@@ -23,8 +23,10 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
         LoadImaged(keys=["image", "label"]),
         EnsureChannelFirstd(keys=["image", "label"], channel_dim="no_channel"),
         # Spacingd(keys=["image", "label"], pixdim=(1.0, 1.0, 1.0), mode=("bilinear", "nearest")),
-        Resized(keys=["image", "label"], spatial_size=(160, 160, 131), mode=("area", "nearest")),
-        ScaleIntensityd(keys=["image"])
+        Resized(keys=["image", "label"], spatial_size=(224, 224, 131), mode=("area", "nearest")),
+        ScaleIntensityd(
+            keys=["image"],minv = 0.0, maxv = 1.0, factor = None
+        )
     ])
 
     for image_file, label_file in zip(image_files, label_files):
@@ -43,8 +45,8 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
             image_slice_filename = f"{os.path.splitext(image_file)[0]}_slice_{i}.png"
             label_slice_filename = f"{os.path.splitext(label_file)[0]}_slice_{i}.png"
 
-            image_slice_path = os.path.join(output_dir, f"img_{image_slice_filename}")
-            label_slice_path = os.path.join(output_dir, f"seg_{label_slice_filename}")
+            image_slice_path = os.path.join(output_dir, "images", f"{image_slice_filename}")
+            label_slice_path = os.path.join(output_dir, "labels", f"{label_slice_filename}")
 
             save_slice_as_png(image_vol[:, :, i], image_slice_path)
             save_slice_as_png(label_vol[:, :, i], label_slice_path)
@@ -56,8 +58,16 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
                 "original_label": label_path
             })
 
+    dataset = dict()
+    dataset['description'] = 'mv2 dataset'
+    dataset['labels'] = {
+        "0": "background",
+        "1": "mv2"
+    }
+    dataset['data'] = output_info
+
     with open(json_file, 'w') as f:
-        json.dump(output_info, f, indent=4)
+        json.dump(dataset, f, indent=4)
 
     print(f"Processing complete. Data saved to '{json_file}'.")
 
