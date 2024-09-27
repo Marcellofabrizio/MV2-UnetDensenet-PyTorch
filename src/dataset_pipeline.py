@@ -17,7 +17,7 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
     output_info = []
 
     image_files = sorted([f for f in os.listdir(image_dir) if f.endswith(".nii") or f.endswith(".nii.gz")])
-    label_files = sorted([f for f in os.listdir(label_dir) if f.endswith(".nii") or f.endswith(".seg.nii.gz")])
+    label_files = sorted([f for f in os.listdir(label_dir) if f.endswith(".nii") or f.endswith(".nii.gz")])
 
     transforms = Compose([
         LoadImaged(keys=["image", "label"]),
@@ -41,9 +41,10 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
         image_vol = transformed_data["image"][0]
         label_vol = transformed_data["label"][0]
 
-        for i in range(image_vol.shape[2]): 
-            image_slice_filename = f"{os.path.splitext(image_file)[0]}_slice_{i}.png"
-            label_slice_filename = f"{os.path.splitext(label_file)[0]}_slice_{i}.png"
+        for i in range(image_vol.shape[2]):
+            file_name = str(image_file).rsplit('.nii.gz', 1)[0]
+            image_slice_filename = f"{os.path.splitext(file_name)[0]}_slice_{i}.png"
+            label_slice_filename = f"{os.path.splitext(file_name)[0]}_slice_{i}.png"
 
             image_slice_path = os.path.join(output_dir, "images", f"{image_slice_filename}")
             label_slice_path = os.path.join(output_dir, "labels", f"{label_slice_filename}")

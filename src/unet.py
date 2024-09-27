@@ -167,7 +167,6 @@ class UnetDensenet(nn.Module):
     def get_backbone(self):
         
         backbone = DenseNet121(in_channels=1, out_channels=1, spatial_dims=2, pretrained=True).features
-        # backbone = densenet121(weights=DenseNet121_Weights.DEFAULT).features
         feature_names = [None, 'relu0', 'denseblock1', 'denseblock2', 'denseblock3']
         backbone_output = 'denseblock4'
         

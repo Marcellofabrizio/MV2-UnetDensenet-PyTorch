@@ -24,7 +24,21 @@ from monai.transforms import(
     SpatialCropd,
     ToTensord,
     ScaleIntensityd,
+    EnsureType,
 )
+
+def CreatePrePedictionTransforms():
+    return Compose([EnsureType(), AsDiscrete(argmax=True, to_onehot=2)])
+
+def CreatePostLabelTransforms():
+    return Compose([EnsureType(), AsDiscrete(to_onehot=2)])
+
+def CreateBaseTransforms():
+    return Compose([
+        LoadImaged(keys=["image", "label"]),
+        EnsureChannelFirstd(keys=["image", "label"]),
+        RandRotate90d(keys=["image", "label"], prob=0.5, spatial_axes=[0, 1])
+    ])
 
 def CreateTrainTransforms(cropSize=[64,64,64], padding=10, num_sample=10):
     return Compose(
