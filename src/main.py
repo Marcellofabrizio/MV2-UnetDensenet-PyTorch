@@ -54,8 +54,8 @@ test_dataset  = Dataset(
     data=test_images, 
     transform=CreateBaseTransforms())
 
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=8, pin_memory=torch.cuda.is_available())
-val_loader = DataLoader(val_dataset, batch_size=32, num_workers=4, pin_memory=torch.cuda.is_available())
+train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=8, pin_memory=torch.cuda.is_available())
+val_loader = DataLoader(val_dataset, batch_size=16, num_workers=4, pin_memory=torch.cuda.is_available())
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = UnetDensenet((224, 224, 1)).to(device)
@@ -70,6 +70,8 @@ val_interval = 2
 best_metric = -1
 best_metric_epoch = -1
 writer = SummaryWriter()
+
+torch.cuda.set_per_process_memory_fraction(0.25, device=torch.cuda.current_device())
 
 for epoch in range(5):
     print("-" * 10)
