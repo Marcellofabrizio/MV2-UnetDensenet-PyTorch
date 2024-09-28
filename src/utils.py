@@ -29,14 +29,18 @@ from monai.transforms import(
     MeanEnsembled,
     Activationsd,
     AsDiscreted,
-    SaveImaged
+    SaveImaged,
+    Activations
 )
 
 def CreatePrePedictionTransforms():
-    return Compose([EnsureType(), AsDiscrete(argmax=True, to_onehot=2)])
+    return Compose([EnsureType(), AsDiscrete(argmax=True, to_onehot=1)])
 
 def CreatePostLabelTransforms():
-    return Compose([EnsureType(), AsDiscrete(to_onehot=2)])
+    return Compose([EnsureType(), Activations(sigmoid=True), AsDiscrete(threshold_values=True)])
+
+def CreatePostTransTransforms():
+    return Compose([Activations(sigmoid=True), AsDiscrete(threshold=0.5)])
 
 def CreateBaseTransforms():
     return Compose([

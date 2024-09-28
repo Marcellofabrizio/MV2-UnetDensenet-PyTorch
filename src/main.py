@@ -1,23 +1,20 @@
-from cv_dataset import CVDataset
-from trainer import ensemble_evaluate, train
+from training import trainer, trainer_v2
 from unet import UnetDensenet
-from utils import CreateBaseTransforms, CreateEnsembleTransforms
-
-import matplotlib.pyplot as plt
-import numpy as np
-import torchvision
+from utils import CreateBaseTransforms, CreatePostLabelTransforms, CreatePrePedictionTransforms
 
 import json
 
 import torch
+from torch.utils.tensorboard import SummaryWriter
 
-from monai.apps import (
-    CrossValidation
-)
+import monai
+
+from monai.metrics import ROCAUCMetric
 
 from monai.data import (
     DataLoader,
     Dataset, 
+    decollate_batch,
     partition_dataset,
 )
 
@@ -31,69 +28,37 @@ labels = [item['label'] for item in dataset['data']]
 
 data = list(zip(image_paths, labels))
 
-data_list, test_data = partition_dataset(
-    data, ratios=[0.85, 0.15], shuffle=True, seed=42
+train_data, val_data, test_data = partition_dataset(
+    data, ratios=[0.7, 0.15, 0.15], shuffle=True, seed=42
 )
 
-print(data_list[0])
+print(train_data[0])
 
-train_val_images = [{"image": img, "label": label} for img, label in data_list]
+train_images = [{"image": img, "label": label} for img, label in train_data]
+val_images = [{"image": img, "label": label} for img, label in val_data]
 test_images = [{"image": img, "label": label} for img, label in test_data]
 
-num = 5
-folds = list(range(num))
+print("{} training images".format(len(train_images)))
+print("{} validation images".format(len(val_images)))
+print("{} testing images".format(len(test_images)))
 
-cvdataset = CrossValidation(
-    dataset_cls=CVDataset,
-    data=train_val_images,
-    nfolds=num,
-    seed=12345,
-    transform=CreateBaseTransforms(),
-)
 
-train_dataset = [cvdataset.get_dataset(folds=folds[0:i] + folds[(i + 1) :]) for i in folds]
+train_dataset = Dataset(
+    data=train_images,
+    transform=CreateBaseTransforms())
 
-val_dataset = [cvdataset.get_dataset(folds=i, transform=CreateBaseTransforms()) for i in range(num)]
+val_dataset   = Dataset(
+    data=val_images, 
+    transform=CreateBaseTransforms())
 
 test_dataset  = Dataset(
     data=test_images, 
     transform=CreateBaseTransforms())
 
-train_loaders = [DataLoader(train_dataset[i], batch_size=1, shuffle=True, num_workers=4, pin_memory=False) for i in folds]
-val_loaders = [DataLoader(val_dataset[i], batch_size=1, num_workers=4, pin_memory=False) for i in folds]
-test_loader = DataLoader(test_dataset, batch_size=1, num_workers=4)
+train_loader = DataLoader(train_dataset, batch_size=2, shuffle=True, num_workers=4)
+val_loader = DataLoader(val_dataset, batch_size=2, num_workers=2)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = UnetDensenet((224, 224, 1)).to(device)
 
-def matplotlib_imshow(img, one_channel=False):
-    if one_channel:
-        img = img.mean(dim=0)
-    img = img / 2 + 0.5     # unnormalize
-    npimg = img.numpy()
-    if one_channel:
-        plt.imshow(npimg, cmap="Greys")
-    else:
-        plt.imshow(np.transpose(npimg, (1, 2, 0)))
-
-images = 0
-imgs = []
-
-for i in train_loaders[0]:
-    if images == 4:
-        break
-    
-    images += 1
-    print(i['image'].shape)
-    imgs.append(i['image'])
-
-npimg = torch.squeeze(imgs[0], dim=1).squeeze(0).numpy()
-plt.imshow(npimg,cmap='gray')
-plt.show()
-
-
-models = [train(train_loaders[i], val_loaders[i], model, device) for i in range(num)]
-
-# mean_post_transforms = CreateEnsembleTransforms(len(models))
-
-# ensemble_evaluate(mean_post_transforms, models, test_loader, device)
+trainer_v2(model, train_loader, train_dataset, val_loader, device)
