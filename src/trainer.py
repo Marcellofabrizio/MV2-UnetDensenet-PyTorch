@@ -8,7 +8,7 @@ from monai.losses import DiceLoss
 
 from monai.metrics import ROCAUCMetric
 
-from monai.engines import SupervisedEvaluator, SupervisedTrainer
+from monai.engines import SupervisedEvaluator, SupervisedTrainer, EnsembleEvaluator
 from monai.handlers import MeanDice, StatsHandler, ValidationHandler, from_engine
 from monai.inferers import SimpleInferer, SlidingWindowInferer
 from monai.losses import DiceLoss
@@ -83,7 +83,7 @@ def trainer_module(model, train_loader, train_dataset, val_loader, device=None):
     print(f"train completed, best_metric: {best_metric:.4f} at epoch: {best_metric_epoch}")
     writer.close()
     
-def train(index, train_loader, val_loader, net, device):
+def train(train_loader, val_loader, net, device):
     loss = DiceLoss(to_onehot_y=True, sigmoid=True, squared_pred=True)
     opt = torch.optim.Adam(net.parameters(), 1e-3)
 
@@ -111,7 +111,7 @@ def train(index, train_loader, val_loader, net, device):
 
     trainer = SupervisedTrainer(
         device=device,
-        max_epochs=4,
+        max_epochs=200,
         train_data_loader=train_loader,
         network=net,
         optimizer=opt,
@@ -122,3 +122,19 @@ def train(index, train_loader, val_loader, net, device):
     )
     trainer.run()
     return net
+
+def ensemble_evaluate(post_transforms, models, test_loader, device):
+    evaluator = EnsembleEvaluator(
+        device=device,
+        val_data_loader=test_loader,
+        pred_keys=["pred{}".format(i) for i in range(len(models))], 
+        networks=models,
+        postprocessing=post_transforms,
+        key_val_metric={
+            "test_mean_dice": MeanDice(
+                include_background=True,
+                output_transform=from_engine(["pred", "label"]),
+            )
+        },
+    )
+    evaluator.run()

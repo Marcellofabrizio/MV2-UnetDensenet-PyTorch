@@ -25,6 +25,11 @@ from monai.transforms import(
     ToTensord,
     ScaleIntensityd,
     EnsureType,
+    EnsureTyped,
+    MeanEnsembled,
+    Activationsd,
+    AsDiscreted,
+    SaveImaged
 )
 
 def CreatePrePedictionTransforms():
@@ -39,6 +44,27 @@ def CreateBaseTransforms():
         EnsureChannelFirstd(keys=["image", "label"]),
         RandRotate90d(keys=["image", "label"], prob=0.5, spatial_axes=[0, 1])
     ])
+
+def CreateEnsembleTransforms(pred_models):
+    keys = ["pred{}".format(i) for i in range(pred_models)]
+    return Compose(
+        [
+            EnsureTyped(keys=keys),
+            MeanEnsembled(
+                keys=keys,
+                output_key="pred",
+                # in this particular example, we use validation metrics as weights
+                weights=[0.95, 0.94, 0.95, 0.94, 0.90],
+            ),
+            Activationsd(keys="pred", sigmoid=True),
+            AsDiscreted(keys="pred", threshold=0.5),
+            SaveImaged(keys="pred", 
+                       output_dir="/home/marcello/Repositories/DICOM-Project-Pytorch/out", 
+                       output_postfix="seg", 
+                       output_ext='.png',
+                       resample=False)
+        ]
+    )
 
 def CreateTrainTransforms(cropSize=[64,64,64], padding=10, num_sample=10):
     return Compose(
