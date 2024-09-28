@@ -8,8 +8,13 @@ from monai.losses import DiceLoss
 
 from monai.metrics import ROCAUCMetric
 
+from monai.engines import SupervisedEvaluator, SupervisedTrainer
+from monai.handlers import MeanDice, StatsHandler, ValidationHandler, from_engine
+from monai.inferers import SimpleInferer, SlidingWindowInferer
+from monai.losses import DiceLoss
+
 from utils import CreatePostLabelTransforms, CreatePrePedictionTransforms
-def trainer(model, train_loader, train_dataset, val_loader, device=None):
+def trainer_module(model, train_loader, train_dataset, val_loader, device=None):
     
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -77,3 +82,43 @@ def trainer(model, train_loader, train_dataset, val_loader, device=None):
                 writer.add_scalar("val_accuracy", acc_metric, epoch + 1)
     print(f"train completed, best_metric: {best_metric:.4f} at epoch: {best_metric_epoch}")
     writer.close()
+    
+def train(index, train_loader, val_loader, net, device):
+    loss = DiceLoss(to_onehot_y=True, sigmoid=True, squared_pred=True)
+    opt = torch.optim.Adam(net.parameters(), 1e-3)
+
+    # val_post_transforms = Compose(
+    #     [EnsureTyped(keys="pred"), Activationsd(keys="pred", sigmoid=True), AsDiscreted(keys="pred", threshold=0.5)]
+    # )
+
+    evaluator = SupervisedEvaluator(
+        device=device,
+        val_data_loader=val_loader,
+        network=net,
+        # inferer=SlidingWindowInferer(roi_size=(112, 112), sw_batch_size=4, overlap=0.5),
+        # postprocessing=val_post_transforms,
+        key_val_metric={
+            "val_mean_dice": MeanDice(
+                include_background=True,
+                output_transform=from_engine(["pred", "label"]),
+            )
+        },
+    )
+    train_handlers = [
+        ValidationHandler(validator=evaluator, interval=4, epoch_level=True),
+        StatsHandler(tag_name="train_loss", output_transform=from_engine(["loss"], first=True)),
+    ]
+
+    trainer = SupervisedTrainer(
+        device=device,
+        max_epochs=4,
+        train_data_loader=train_loader,
+        network=net,
+        optimizer=opt,
+        loss_function=loss,
+        inferer=SimpleInferer(),
+        amp=False,
+        train_handlers=train_handlers,
+    )
+    trainer.run()
+    return net
