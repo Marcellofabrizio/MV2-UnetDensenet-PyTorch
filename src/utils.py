@@ -30,6 +30,7 @@ from monai.transforms import(
     Activationsd,
     AsDiscreted,
     SaveImaged,
+    ScaleIntensity,
     Activations
 )
 
@@ -45,6 +46,7 @@ def CreatePostTransTransforms():
 def CreateBaseTransforms():
     return Compose([
         LoadImaged(keys=["image", "label"]),
+        ScaleIntensityd(keys=["image", "label"], minv=0.0, maxv=1.0),
         EnsureChannelFirstd(keys=["image", "label"]),
         RandRotate90d(keys=["image", "label"], prob=0.5, spatial_axes=[0, 1])
     ])

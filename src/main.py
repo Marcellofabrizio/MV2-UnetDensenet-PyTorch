@@ -61,4 +61,6 @@ val_loader = DataLoader(val_dataset, batch_size=2, num_workers=2)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = UnetDensenet((224, 224, 1)).to(device)
 
+print(model)
+
 trainer_v2(model, train_loader, train_dataset, val_loader, device)

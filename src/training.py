@@ -15,6 +15,7 @@ from monai.losses import DiceLoss
 from monai.visualize import plot_2d_or_3d_image
 from monai.inferers import sliding_window_inference
 
+from loss_functions import BCEDiceLoss, DiceBCELoss
 from utils import CreatePostLabelTransforms, CreatePostTransTransforms, CreatePrePedictionTransforms
 def trainer(model, train_loader, train_dataset, val_loader, device=None):
     
@@ -89,7 +90,7 @@ def trainer_v2(model, train_loader, train_dataset, val_loader, device=None):
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    loss_function = DiceLoss(to_onehot_y=True, sigmoid=True, squared_pred=True)
+    loss_function = DiceBCELoss()
     optimizer = torch.optim.Adam(model.parameters(), 1e-5)
 
     val_interval = 2
@@ -108,9 +109,9 @@ def trainer_v2(model, train_loader, train_dataset, val_loader, device=None):
     
     dice_metric = DiceMetric(include_background=True, reduction="mean", get_not_nans=False)
     
-    for epoch in range(10):
+    for epoch in range(100):
         print("-" * 10)
-        print(f"epoch {epoch + 1}/{10}")
+        print(f"epoch {epoch + 1}/{100}")
         model.train()
         epoch_loss = 0
         step = 0
@@ -167,7 +168,7 @@ def trainer_v2(model, train_loader, train_dataset, val_loader, device=None):
 
     
 def train(train_loader, val_loader, net, device):
-    loss = DiceLoss(to_onehot_y=True, sigmoid=True, squared_pred=True)
+    loss = DiceBCELoss()
     opt = torch.optim.Adam(net.parameters(), 1e-3)
 
     # val_post_transforms = Compose(
