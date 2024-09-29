@@ -169,7 +169,7 @@ def trainer_v2(model, train_loader, train_dataset, val_loader, device=None):
     
 def train(train_loader, val_loader, net, device):
     loss = DiceBCELoss()
-    opt = torch.optim.Adam(net.parameters(), 1e-3)
+    opt = torch.optim.Adam(net.parameters(), 1e-5)
 
     # val_post_transforms = Compose(
     #     [EnsureTyped(keys="pred"), Activationsd(keys="pred", sigmoid=True), AsDiscreted(keys="pred", threshold=0.5)]
@@ -195,7 +195,7 @@ def train(train_loader, val_loader, net, device):
 
     trainer = SupervisedTrainer(
         device=device,
-        max_epochs=200,
+        max_epochs=10,
         train_data_loader=train_loader,
         network=net,
         optimizer=opt,
