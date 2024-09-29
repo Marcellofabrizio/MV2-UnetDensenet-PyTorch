@@ -31,6 +31,7 @@ from monai.transforms import(
     AsDiscreted,
     SaveImaged,
     ScaleIntensity,
+    VoteEnsembled,
     Activations
 )
 
@@ -55,20 +56,15 @@ def CreateEnsembleTransforms(pred_models):
     keys = ["pred{}".format(i) for i in range(pred_models)]
     return Compose(
         [
-            EnsureTyped(keys=keys),
-            MeanEnsembled(
-                keys=keys,
-                output_key="pred",
-                # in this particular example, we use validation metrics as weights
-                weights=[0.95, 0.94, 0.95, 0.94, 0.90],
-            ),
-            Activationsd(keys="pred", sigmoid=True),
-            AsDiscreted(keys="pred", threshold=0.5),
-            SaveImaged(keys="pred", 
-                       output_dir="/home/marcello/Repositories/DICOM-Project-Pytorch/out", 
-                       output_postfix="seg", 
-                       output_ext='.png',
-                       resample=False)
+            EnsureTyped(keys=["pred0", "pred1", "pred2", "pred3", "pred4"]),
+            Activationsd(keys=["pred0", "pred1", "pred2", "pred3", "pred4"], sigmoid=True),
+            AsDiscreted(keys=["pred0", "pred1", "pred2", "pred3", "pred4"], threshold=0.5),
+            VoteEnsembled(keys=["pred0", "pred1", "pred2", "pred3", "pred4"], output_key="pred"),
+            # SaveImaged(keys="pred", 
+            #            output_dir="/home/marcello/Repositories/DICOM-Project-Pytorch/out", 
+            #            output_postfix="seg", 
+            #            output_ext='.png',
+            #            resample=False)
         ]
     )
 

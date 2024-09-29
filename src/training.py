@@ -222,3 +222,4 @@ def ensemble_evaluate(post_transforms, models, test_loader, device):
         },
     )
     evaluator.run()
+    return evaluator.get_stats()
