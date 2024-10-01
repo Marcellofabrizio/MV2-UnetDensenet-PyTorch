@@ -96,4 +96,4 @@ models = [train(train_loaders[i], val_loaders[i], model, device) for i in range(
 
 mean_post_transforms = CreateEnsembleTransforms(len(models))
 
-print(ensemble_evaluate(mean_post_transforms, models, test_loader, device))
+ensemble_evaluate(mean_post_transforms, models, test_loader, device)
