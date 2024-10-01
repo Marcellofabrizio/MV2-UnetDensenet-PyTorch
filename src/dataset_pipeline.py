@@ -16,8 +16,8 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
     
     output_info = []
 
-    image_files = sorted([f for f in os.listdir(image_dir) if f.endswith(".nii") or f.endswith(".nii.gz")])
-    label_files = sorted([f for f in os.listdir(label_dir) if f.endswith(".nii") or f.endswith(".nii.gz")])
+    image_files = sorted([f for f in os.listdir(image_dir) if f.endswith(".nii.gz")])
+    label_files = sorted([f for f in os.listdir(label_dir) if f.endswith(".nii.gz")])
 
     transforms = Compose([
         LoadImaged(keys=["image", "label"]),
