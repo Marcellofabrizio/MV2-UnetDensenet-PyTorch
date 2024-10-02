@@ -168,7 +168,7 @@ def trainer_v2(model, train_loader, train_dataset, val_loader, device=None):
 
     
 def train(train_loader, val_loader, net, device):
-    epochs = 25
+    epochs = 100
     print(f"Training with {epochs} epochs")
     loss = DiceBCELoss()
     opt = torch.optim.Adam(net.parameters(), 1e-5)
