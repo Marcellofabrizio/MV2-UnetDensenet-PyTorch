@@ -73,9 +73,9 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
     print(f"Processing complete. Data saved to '{json_file}'.")
 
 if __name__ == "__main__":
-    image_dir = "/home/marcello/Documentos/Universidade/Dicoms/cropped-dicoms/images"
-    label_dir = "/home/marcello/Documentos/Universidade/Dicoms/cropped-dicoms/labels"
-    output_dir = "/home/marcello/Documentos/dicoms/dataset1"
-    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset1/dataset1.json"
+    image_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset2/images"
+    label_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset2/labels"
+    output_dir = "/home/marcello/Documentos/dicoms/dataset2"
+    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset2/dataset2.json"
 
     process_nifti_files(image_dir, label_dir, output_dir, json_output_file)
