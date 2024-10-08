@@ -1,13 +1,13 @@
 import json
 import os
 
-with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset2/dataset2.json', 'r') as file:
+with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset3/dataset3.json', 'r') as file:
     data_dict = json.load(file)
 
 # Filter the data by checking if both image and label files exist on disk
 filtered_data = [
     item for item in data_dict['data']
-    if os.path.exists(item['image_path']) and os.path.exists(item['label_path'])
+    if os.path.exists(item['image']) and os.path.exists(item['label'])
 ]
 
 # Update the 'data' key in the original dictionary with filtered data

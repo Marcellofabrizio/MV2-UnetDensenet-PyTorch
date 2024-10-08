@@ -53,8 +53,8 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
             save_slice_as_png(label_vol[:, :, i], label_slice_path)
 
             output_info.append({
-                "image_path": image_slice_path,
-                "label_path": label_slice_path,
+                "image": image_slice_path,
+                "label": label_slice_path,
                 "original_image": image_path,
                 "original_label": label_path
             })
@@ -73,9 +73,9 @@ def process_nifti_files(image_dir, label_dir, output_dir, json_file):
     print(f"Processing complete. Data saved to '{json_file}'.")
 
 if __name__ == "__main__":
-    image_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset2/images"
-    label_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset2/labels"
-    output_dir = "/home/marcello/Documentos/dicoms/dataset2"
-    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset2/dataset2.json"
+    image_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset3/images"
+    label_dir = "/home/marcello/Documentos/dicoms/dicoms-dataset3/labels"
+    output_dir = "/home/marcello/Documentos/dicoms/dataset3"
+    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset3/dataset3.json"
 
     process_nifti_files(image_dir, label_dir, output_dir, json_output_file)
