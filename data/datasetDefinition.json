@@ -1,0 +1,133 @@
+{
+    "description": "DICOM train test split definition",
+    "data": {
+        "train": [
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAP11-12R.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAP11-12R.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAP14R.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAP14R.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAP14R_04042023_192358_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAP14R_04042023_192358_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAQ13-22R_11042023_193704_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAQ13-22R_11042023_193704_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAQ13-22R_11042023_193704_001_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAQ13-22R_11042023_193704_001_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAR17-02R_04042023_204419_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAR17-02R_04042023_204419_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAS09-04R_04042023_195051_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAS09-04R_04042023_195051_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAS15-08R_04042023_201720_001_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAS15-08R_04042023_201720_001_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/2ABS09-04R_04042023_195700_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/2ABS09-04R_04042023_195700_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220607_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220607_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220607_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220607_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220620145917479_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220620145917479_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220620145917479_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220620145917479_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220620_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220620_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221004_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221004_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213104507838_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213104507838_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213104507838_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213104507838_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213121232825_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213121232825_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213143719277_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213143719277_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213160424304_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213160424304_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213163526881_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213163526881_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213165935146_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213165935146_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213165935146_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213165935146_2.nii.gz"
+            }
+        ],
+        "test": [
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220620_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220620_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213163526881_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213163526881_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221004_2.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221004_2.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/1AAS15-08R_04042023_201720_001.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/1AAS15-08R_04042023_201720_001.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213120859208_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213120859208_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213142000749_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213142000749_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20221213143719277_1.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20221213143719277_1.nii.gz"
+            },
+            {
+                "image": "/home/marcello/Documentos/dicoms/cropped-dicoms/images/20220607_3.nii.gz",
+                "label": "/home/marcello/Documentos/dicoms/cropped-dicoms/labels/20220607_3.nii.gz"
+            }
+        ]
+    }
+}
