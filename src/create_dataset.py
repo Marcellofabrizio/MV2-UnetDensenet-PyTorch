@@ -4,7 +4,7 @@ import SimpleITK as sitk
 import numpy as np
 import json
 from PIL import Image
-from monai.transforms import Compose, LoadImaged, EnsureChannelFirstd, Resized, Spacingd, ScaleIntensityd
+from monai.transforms import Compose, LoadImaged, EnsureChannelFirstd, Resized, RandRotate90d, Flipd, ScaleIntensityd
 
 def to_np_array(slice_array):
     slice_array = (slice_array - np.min(slice_array)) / (np.max(slice_array) - np.min(slice_array)) * 255
@@ -42,8 +42,9 @@ def create_images(files, base_dir, output_dir, exclusion_chance):
     transforms = Compose([
         LoadImaged(keys=["image", "label"]),
         EnsureChannelFirstd(keys=["image", "label"], channel_dim="no_channel"),
-        # Spacingd(keys=["image", "label"], pixdim=(1.0, 1.0, 1.0), mode=("bilinear", "nearest")),
         Resized(keys=["image", "label"], spatial_size=(224, 224, 131), mode=("area", "nearest")),
+        RandRotate90d(keys=["image", "label"], prob=0.5),
+        Flipd(keys=["image", "label"], spatial_axis=2),
         ScaleIntensityd(
             keys=["image"],minv = 0.0, maxv = 1.0, factor = None
         )
@@ -138,7 +139,7 @@ if __name__ == "__main__":
 
     base_dir = dicom_definition_json["basePath"]
     
-    output_dir = "/home/marcello/Documentos/dicoms/dataset4"
-    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset4/dataset4.json"
+    output_dir = "/home/marcello/Documentos/dicoms/dataset8"
+    json_output_file = "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset5/dataset8.json"
 
     process_nifti_files(train_files, test_files, base_dir, output_dir, json_output_file, exclude_blank_percentage)

@@ -1,7 +1,7 @@
 import json
 import os
 
-with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset4/dataset4_25.json', 'r') as file:
+with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset5/dataset5.json', 'r') as file:
     data_dict = json.load(file)
 
 # Filter the data by checking if both image and label files exist on disk
@@ -25,5 +25,5 @@ data_dict['trainImages'] = len(data_dict['data']["train"])
 data_dict['testImages'] = len(data_dict['data']["test"])
 
 # Save the updated JSON back to the file (or a new file)
-with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset4/dataset4_25.json', 'w') as file:
+with open('/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset5/dataset5.json', 'w') as file:
     json.dump(data_dict, file, indent=4)
