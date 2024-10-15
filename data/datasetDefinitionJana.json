@@ -1,0 +1,50 @@
+{
+    "description": "DICOM train test split definition",
+    "basePath": "/home/marcello/Documentos/dicoms/dicoms-dataset",
+    "data": {
+        "train": [
+            {
+                "image": "1AAP11-12R.nii.gz",
+                "label": "1AAP11-12R.nii.gz"
+            },
+            {
+                "image": "1AAP14R.nii.gz",
+                "label": "1AAP14R.nii.gz"
+            },
+            {
+                "image": "1AAP14R_04042023_192358_001.nii.gz",
+                "label": "1AAP14R_04042023_192358_001.nii.gz"
+            },
+            {
+                "image": "1AAQ13-22R_11042023_193704_001.nii.gz",
+                "label": "1AAQ13-22R_11042023_193704_001.nii.gz"
+            },
+            {
+                "image": "1AAQ13-22R_11042023_193704_001_1.nii.gz",
+                "label": "1AAQ13-22R_11042023_193704_001_1.nii.gz"
+            },
+            {
+                "image": "1AAR17-02R_04042023_204419_001.nii.gz",
+                "label": "1AAR17-02R_04042023_204419_001.nii.gz"
+            },
+            {
+                "image": "1AAS09-04R_04042023_195051_001.nii.gz",
+                "label": "1AAS09-04R_04042023_195051_001.nii.gz"
+            }
+        ],
+        "test": [
+            {
+                "image": "1AAS15-08R_04042023_201720_001.nii.gz",
+                "label": "1AAS15-08R_04042023_201720_001.nii.gz"
+            },
+            {
+                "image": "2ABS09-04R_04042023_195700_001.nii.gz",
+                "label": "2ABS09-04R_04042023_195700_001.nii.gz"
+            },
+            {
+                "image": "1AAS15-08R_04042023_201720_001_1.nii.gz",
+                "label": "1AAS15-08R_04042023_201720_001_1.nii.gz"
+            }
+        ]
+    }
+}
