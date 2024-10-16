@@ -25,7 +25,7 @@ for item in data_dict['data']['test']:
     if (not os.path.exists(image)) and os.path.exists(label):
         os.remove(label)
     else:
-        filtered_train_data.append(item)
+        filtered_test_data.append(item)
 
 data_dict['data']["train"] = filtered_train_data
 data_dict['data']["test"] = filtered_test_data
