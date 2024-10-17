@@ -4,5 +4,6 @@ src/__pycache__
 runs
 out
 data/dataset
-data/checkpoints
 checkpoints
+models
+weights
