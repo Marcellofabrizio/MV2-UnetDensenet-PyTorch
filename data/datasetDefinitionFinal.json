@@ -1,0 +1,139 @@
+{
+    "description": "DICOM train test split definition",
+    "basePath": "/home/marcello/Documentos/dicoms/dicoms-dataset",
+    "data": {
+        "redo": [
+            {
+                "image": "1AAP11-12R.nii.gz",
+                "label": "1AAP11-12R.nii.gz"
+            },
+            {
+                "image": "1AAP14R.nii.gz",
+                "label": "1AAP14R.nii.gz"
+            },
+            {
+                "image": "1AAQ13-22R_11042023_193704_001.nii.gz",
+                "label": "1AAQ13-22R_11042023_193704_001.nii.gz"
+            }
+        ],
+        "train": [
+            {
+                "image": "1AAP11-12R.nii.gz",
+                "label": "1AAP11-12R.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAP14R.nii.gz",
+                "label": "1AAP14R.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAQ13-22R_11042023_193704_001.nii.gz",
+                "label": "1AAQ13-22R_11042023_193704_001.nii.gz",
+                "type": "2"
+            },
+            {
+                "image": "1AAP14R_04042023_192358_001.nii.gz",
+                "label": "1AAP14R_04042023_192358_001.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAQ13-22R_11042023_193704_001_1.nii.gz",
+                "label": "1AAQ13-22R_11042023_193704_001_1.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAR17-02R_04042023_204419_001.nii.gz",
+                "label": "1AAR17-02R_04042023_204419_001.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAS09-04R_04042023_195051_001.nii.gz",
+                "label": "1AAS09-04R_04042023_195051_001.nii.gz",
+                "type": "3"
+            },
+            {
+                "image": "1AAS15-08R_04042023_201720_001_1.nii.gz",
+                "label": "1AAS15-08R_04042023_201720_001_1.nii.gz",
+                "type": "2"
+            },
+            {
+                "image": "2ABS09-04R_04042023_195700_001.nii.gz",
+                "label": "2ABS09-04R_04042023_195700_001.nii.gz",
+                "type": "2"
+            },
+            {
+                "image": "20220607_1.nii.gz",
+                "label": "20220607_1.nii.gz",
+                "type": "7"
+            },
+            {
+                "image": "20220607_2.nii.gz",
+                "label": "20220607_2.nii.gz",
+                "type": "2"
+            },
+            {
+                "image": "20220620145917479_1.nii.gz",
+                "label": "20220620145917479_1.nii.gz",
+                "type": "2"
+            },
+            {
+                "image": "20220620145917479_2.nii.gz",
+                "label": "20220620145917479_2.nii.gz",
+                "type": "6"
+            },
+            {
+                "image": "20220620_1.nii.gz",
+                "label": "20220620_1.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "20221004_1.nii.gz",
+                "label": "20221004_1.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "20221213104507838_1.nii.gz",
+                "label": "20221213104507838_1.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "20221213120859208_1.nii.gz",
+                "label": "20221213120859208_1.nii.gz",
+                "type": "2"
+            }
+        ],
+        "test": [
+            {
+                "image": "20220620_2.nii.gz",
+                "label": "20220620_2.nii.gz",
+                "type": "6"
+            },
+            {
+                "image": "20221213163526881_1.nii.gz",
+                "label": "20221213163526881_1.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "20221004_2.nii.gz",
+                "label": "20221004_2.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "1AAS15-08R_04042023_201720_001.nii.gz",
+                "label": "1AAS15-08R_04042023_201720_001.nii.gz",
+                "type": "5"
+            },
+            {
+                "image": "20221213104507838_2.nii.gz",
+                "label": "20221213104507838_2.nii.gz",
+                "type": "4"
+            },
+            {
+                "image": "20221213121232825_2.nii.gz",
+                "label": "20221213121232825_2.nii.gz",
+                "type": "5"
+            }
+        ]
+    }
+}

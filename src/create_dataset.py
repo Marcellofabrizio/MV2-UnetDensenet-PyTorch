@@ -1,6 +1,5 @@
 import os
 import sys
-import SimpleITK as sitk
 import numpy as np
 import json
 from PIL import Image
@@ -8,9 +7,6 @@ from monai.transforms import (
     Compose,
     LoadImaged,
     EnsureChannelFirstd,
-    Resized,
-    RandRotate90d,
-    Flipd,
     ScaleIntensityd,
 )
 
@@ -41,7 +37,6 @@ def save_slices(image_array, label_array, image_path, label_path, exclusion_chan
     label.save(label_path)
 
     return True
-
 
 def create_images(files, base_dir, output_dir, exclusion_chance):
     image_dir = f"{base_dir}/images"
@@ -161,9 +156,9 @@ if __name__ == "__main__":
 
     base_dir = dicom_definition_json["basePath"]
 
-    output_dir = "/home/marcello/Documentos/dicoms/dataset10"
+    output_dir = "/home/marcello/Documentos/dicoms/dataset-final-2"
     json_output_file = (
-        "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset10/dataset10.json"
+        "/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset-final/dataset-final-2.json"
     )
 
     process_nifti_files(

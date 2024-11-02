@@ -3,7 +3,7 @@ import os
 
 # Machine God, cleanse the dataset from the Archenemy interference. Praise be The Omnissiah
 
-json_path = '/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset10/dataset10.json'
+json_path = '/home/marcello/Repositories/DICOM-Project-Pytorch/data/dataset-final-2/dataset-final-2.json'
 
 with open(json_path, 'r') as file:
     data_dict = json.load(file)
